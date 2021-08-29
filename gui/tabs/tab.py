@@ -10,7 +10,7 @@ class Tab:
         #make new window
         self.type = type
 
-        with add_window(label=window_label, height=size[0], width=size[1], on_close=self.on_close) as self.window:
+        with window(label=window_label, height=size[0], width=size[1], on_close=self.on_close) as self.window:
             #resize handler
             add_resize_handler(self.window, callback=self.on_resize)
             self.gui()

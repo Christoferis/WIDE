@@ -11,9 +11,9 @@ def main():
     #create new Viewport First of all
     
     main_vp = create_viewport(title="wIDE")
-
     setup_dearpygui(viewport=main_vp)
     show_viewport(main_vp)
+
 
     #Prequisits
     text_tab.Text_Tab()
