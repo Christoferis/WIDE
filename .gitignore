@@ -128,3 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 poop.txt
+quiver wIDE.sln
+.gitignore
+.vs/quiver wIDE/v16/.suo
+workspace.code-workspace
+quiver wIDE.pyproj
