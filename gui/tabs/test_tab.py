@@ -1,12 +1,16 @@
 import dearpygui.dearpygui as dpg
 from gui.tabs.tab import Tab
-from util.ioInterface import ioInterface
+from util.ioInterface import ioInterface as io
 
 
-class test_tab(Tab, ioInterface):
+class test_tab(Tab):
 
-    def __init__(self, window_label="test", size=[100, 100], type="tab", essential=False):
-        super().__init__(window_label, size=size, type=type, essential=essential)
+        
+    def __init__(self, window_label="untitled", size=..., type="tab", essential=False):
+        super().__init__(window_label=window_label, size=size, type=type, essential=essential)
+
+        self.io = io()
+
 
     def gui(self):
 
@@ -22,8 +26,9 @@ class test_tab(Tab, ioInterface):
 
     def open_file(self):
         filetypes = (("txt", "*.txt"), ("All Files", "*"))
-        dpg.set_value(item=self.txt, value=super().open_file(filetypes=filetypes).read())
+        dpg.set_value(item=self.txt, value=io.open_file(filetypes=filetypes))
 
-        return super().open_file(filetypes)
+
+
 
     pass

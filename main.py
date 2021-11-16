@@ -19,7 +19,6 @@ def main():
 
 
     #Prequisits
-    text_tab.Text_Tab()
     test_tab()
     
 

@@ -9,6 +9,7 @@ class Text_Tab(tab.Tab, ioInterface):
 
     def __init__(self, text=""):
         super().__init__(window_label="untitled", type="text")
+
         
 
     def gui(self):
