@@ -1,6 +1,5 @@
 #has most dearpygui / tkinter file dialogs and stuff
 import os
-from tkinter.constants import NO
 import dearpygui.dearpygui as dpg
 import tkinter.filedialog as fd
 import tkinter as tk
@@ -12,8 +11,23 @@ class ioInterface:
 
     def __init__(self):
         self.file = None
-        self.edited = False
         pass
+
+    #statics for one time use -> returns whole file obj / list if multiple
+    @staticmethod
+    def static_open_files(path):
+        win = tk.Tk()
+        win.withdraw()
+        file = open(fd.askopenfiles(defaultextension="*", filetypes=("All Files", "*")), mode="+")
+        win.destroy()
+
+        return file
+        
+    @staticmethod
+    def static_save(path, content):
+        with open(path, mode="w") as f:
+            f.write(content)
+
 
     #open single file returns contents
     def open_file(self):
@@ -33,8 +47,6 @@ class ioInterface:
             self.open_file()
 
         self.file.write(content)
-
-        self.edited = False
 
         pass
 
