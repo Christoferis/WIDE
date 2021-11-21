@@ -1,8 +1,9 @@
 #class for handling all text tabs
 
 import dearpygui.dearpygui as dpg
-from gui.tabs import tab_manager as gd, tab
+from gui.tabs import tab
 from util.ioInterface import ioInterface
+from random import random
 
 
 class Text_Tab(tab.Tab, ioInterface):
@@ -10,7 +11,6 @@ class Text_Tab(tab.Tab, ioInterface):
     def __init__(self, text=""):
         super().__init__(window_label="untitled", type="text")
 
-        
 
     def gui(self):
         self.line_nums = dpg.add_input_text(multiline=True, no_spaces=True, readonly=True, width=50, height=500, label="")
@@ -20,7 +20,7 @@ class Text_Tab(tab.Tab, ioInterface):
         #context menu 
         with dpg.menu_bar():
             with dpg.menu(label="File"):
-                dpg.add_menu_item(label="hey")
+                dpg.add_menu_item(label="hey", callback=lambda: dpg.set_value(self.line_nums, str(random())))
 
         return super().gui()
 
@@ -70,5 +70,8 @@ class Text_Tab(tab.Tab, ioInterface):
         for i in range(buffer.count("\n")):
             linenums += str(i) + "\n"
         
-        dpg.set_value(self.line_nums, linenums)
+        dpg.set_value(self.line_nums, "hey")
     
+
+def new_text_tab(self):
+    return Text_Tab()

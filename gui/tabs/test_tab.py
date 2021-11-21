@@ -6,8 +6,8 @@ from util.ioInterface import ioInterface as io
 class test_tab(Tab):
 
         
-    def __init__(self, window_label="untitled", size=..., type="tab", essential=False):
-        super().__init__(window_label=window_label, size=size, type=type, essential=essential)
+    def __init__(self):
+        super().__init__()
 
         self.io = io()
 
@@ -26,7 +26,7 @@ class test_tab(Tab):
 
     def open_file(self):
         filetypes = (("txt", "*.txt"), ("All Files", "*"))
-        dpg.set_value(item=self.txt, value=io.open_file(filetypes=filetypes))
+        dpg.set_value(item=self.txt, value=self.io.open_file())
 
 
 

@@ -3,7 +3,8 @@
 #TODO: Rewrite to tkinter style gui (without context managers)
 
 #imports
-from gui.tabs import text_tab, tab_manager as tm
+from gui.tabs import tab_manager as tm
+from gui.tabs.text_tab import Text_Tab
 from dearpygui.dearpygui import *
 import sys
 
@@ -11,15 +12,20 @@ from gui.tabs.test_tab import test_tab
 
 
 def main():
-    #create new Viewport First of all
-    
+    #create new Viewport and all Viewport oriented stuff First of all
     main_vp = create_viewport(title="wIDE")
     setup_dearpygui(viewport=main_vp)
     show_viewport(main_vp)
 
+    mb = add_viewport_menu_bar()
+    filemen = add_menu(parent=mb, label="File")
+    add_menu_item(callback=lambda: Text_Tab(), parent=filemen, label="New Tab")
+    
+
 
     #Prequisits
     test_tab()
+    Text_Tab()
     
 
     #start Threads for Accesorries
@@ -33,7 +39,6 @@ def main():
 
 
 #Adds tab to the Window
-
 
 
 if __name__ == "__main__":
