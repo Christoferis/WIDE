@@ -41,17 +41,15 @@ class ioInterface:
         return self.file.read()
 
         
-    def save_file(self, content, saveas):
+    def save_file(self, content):
 
-        if self.file is None or saveas:
-            self.open_file()
-
-        self.file.write(content)
+        if self.file is not None:
+            self.file.write(content)
 
         pass
 
     def get_directory(self):
-        return
+        return self.file.name
 
     #closes and reopens all streams
     def io_refresh(self):

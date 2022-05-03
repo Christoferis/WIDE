@@ -6,11 +6,12 @@ from util.ioInterface import ioInterface
 from random import random
 
 
-class Text_Tab(tab.Tab, ioInterface):
+class Text_Tab(tab.Tab):
 
     def __init__(self, text=""):
         super().__init__(window_label="untitled", type="text")
 
+        self.file = ioInterface()
 
     def gui(self):
         self.line_nums = dpg.add_input_text(multiline=True, no_spaces=True, readonly=True, width=50, height=500, label="")
@@ -21,8 +22,7 @@ class Text_Tab(tab.Tab, ioInterface):
         with dpg.menu_bar():
             with dpg.menu(label="File"):
                 dpg.add_menu_item(label="hey", callback=lambda: dpg.set_value(self.line_nums, str(random())))
-
-        return super().gui()
+                dpg.add_menu_item(label="Open File", callback=self.open_file)
 
     #Save current open File
     def save_file(self):
@@ -32,21 +32,26 @@ class Text_Tab(tab.Tab, ioInterface):
 
     #Open a file 
     def open_file(self):
-        super.open_file(self)
+        #save before open
+        self.save_file()
 
-        self.savepath = path
-        self.tab_input(open(path, mode="r").read())
-        dpg.set_item_label(self.window, path)
-        self.update_tab()
+        self.tab_input(self.file.open_file())
+        dpg.set_item_label(self.window, self.file.get_directory())
+        self.refresh_tab()
         pass
+
+    def save_file(self):
+        self.file.save_file(dpg.get_value(self.txt_widget))
 
     #refresh current tabs Linting, Syntax Highlighting and Line Count 
     def refresh_tab(self):
-        super.refresh_tab(self)
+        super().refresh_tab()
 
-        self.update_line_nums()
+        #this might cause a loop
+
+        # self.update_line_nums()
         self.on_enter()
-        self.io_refresh()
+        # self.io_refresh()s
         pass
 
     #input txt directly into window
@@ -62,15 +67,16 @@ class Text_Tab(tab.Tab, ioInterface):
         dpg.set_item_width(self.txt_widget, dpg.get_item_width(self.window))
         pass
 
-
+    #todo: synchronize those text tabs
     def on_enter(self):
         buffer = dpg.get_value(self.txt_widget)
-        linenums = "0"
+        linenums = "1 \n"
 
         for i in range(buffer.count("\n")):
-            linenums += str(i) + "\n"
+            linenums += str(i + 2) + "\n"
         
-        dpg.set_value(self.line_nums, "hey")
+
+        dpg.set_value(self.line_nums, linenums)
     
 
 def new_text_tab(self):
