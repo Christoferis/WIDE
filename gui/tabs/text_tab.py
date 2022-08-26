@@ -5,7 +5,7 @@ from gui.tabs import tab
 from util.ioInterface import ioInterface
 from random import random
 
-
+#maybe change to custom drawn tab thingy
 class Text_Tab(tab.Tab):
 
     def __init__(self, text=""):
@@ -18,7 +18,7 @@ class Text_Tab(tab.Tab):
         dpg.add_same_line(spacing=5)
         self.txt_widget = dpg.add_input_text(multiline=True, tab_input=True, width=500, height=500, label="", on_enter=True, callback=self.on_enter)
 
-        #context menu 
+        #context menu
         with dpg.menu_bar():
             with dpg.menu(label="File"):
                 dpg.add_menu_item(label="hey", callback=lambda: dpg.set_value(self.line_nums, str(random())))

@@ -13,11 +13,13 @@ refresh_time = 2
 def refresh():
     global start
     end = time()
+
     #only active tabs
     for window in all_tabs:
+
         if dpg.is_item_focused(window.window):
             window.refresh_tab()
-        elif end - start >= 2:
+        elif end - start >= refresh_time:
             window.refresh_tab()
             print("General Refresh")
             continue

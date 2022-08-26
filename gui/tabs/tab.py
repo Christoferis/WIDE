@@ -1,6 +1,6 @@
 #Inheritable Class for all Tabs / Windows in wIDE
 
-from dearpygui.dearpygui import *
+import dearpygui.dearpygui as dpg
 from gui.tabs.tab_manager import all_tabs
 
 
@@ -11,11 +11,11 @@ class Tab:
         #make new window
         self.type = type
 
-        with window(label=window_label, height=size[0], width=size[1], on_close=self.on_close, no_close=essential) as self.window:
+        with dpg.window(label=window_label, height=size[0], width=size[1], on_close=self.on_close, no_close=essential) as self.window:
             #resize handler
             self.gui()
         
-        add_resize_handler(self.window, callback=self.on_resize)
+        dpg.add_resize_handler(self.window, callback=self.on_resize)
 
         #add to all the widgets
 
@@ -26,7 +26,7 @@ class Tab:
 
     #General Stuff
     def tab_info(self):
-        return get_item_info(self.window), get_item_state(self.window)
+        return dpg.get_item_info(self.window), dpg.get_item_state(self.window)
 
 
     #callbacks and refreshes
